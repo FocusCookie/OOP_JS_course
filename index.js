@@ -1,50 +1,31 @@
-const circleOld = {
-  radius: 1,
-  draw: function() {
-    console.log("draw");
-  }
-};
-
-// factory function
-function createCircle(radius) {
-  return {
-    radius, //instead od radius:radius,
-    draw: function() {
-      console.log("draw");
-    }
-  };
-}
-
-const circle = createCircle(1);
-circle.draw();
-
-// constructor function
 function Circle(radius) {
   this.radius = radius;
   this.draw = function() {
-    console.log("draw constructor");
+    console.log("draw a circle");
   };
 }
 
-const another = new Circle(1);
-another.draw();
+const circle = new Circle(10);
 
-// VALUE vs Reference type
-let number = 10;
+for (let key in circle) {
+  console.log(key);
+}
+// Output radius draw
 
-function increase(number) {
-  number++;
+for (let key in circle) {
+  console.log(key, circle[key]);
+}
+// Output radius 10
+// draw f()....
+
+// only log the non functions
+for (let key in circle) {
+  if (typeof circle[key] !== "function") {
+    console.log(key, circle[key]);
+  }
 }
 
-increase(number);
-console.log(number);
+const keys = Object.keys(circle);
+console.log(keys);
 
-// VALUE vs Reference type
-let obj = { value: 10 };
-
-function increase(obj) {
-  obj.value++;
-}
-
-increase(obj);
-console.log(obj.value);
+if ("radius" in circle) console.log("Circle has a radius");
