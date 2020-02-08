@@ -1,15 +1,22 @@
 function Circle(radius) {
   this.radius = radius;
 
-  this.defaultLocation = { x: 0, y: 0 };
-
-  this.computeOptimumLocation = function() {
-    //... magic
-  };
+  let defaultLocation = { x: 0, y: 0 };
 
   this.draw = function() {
-    this.computeOptimumLocation();
-
     console.log("draw a circle");
   };
+
+  Object.defineProperty(this, "defaultLocation", {
+    get: function() {
+      return defaultLocation;
+    },
+    set: function(value) {
+      if (!value.x || !value.y) throw new Error("Invalid location.");
+
+      defaultLocation = value;
+    }
+  });
 }
+
+const circle = new Circle(10);
