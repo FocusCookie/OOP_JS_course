@@ -1,11 +1,9 @@
-let person = { name: "stephan" };
+function Circle(radius) {
+  this.radius = radius;
+}
 
-Object.defineProperty(person, "name", {
-  writable: false,
-  enumerable: false, // the property will not show up in Objects.keys(person)
-  configurable: false // not deletable anymore
-});
+Circle.prototype.toString = function() {
+  console.log("draw a circle with radius " + this.radius);
+};
 
-delete person.name;
-
-console.log(person);
+const c1 = new Circle(1);
