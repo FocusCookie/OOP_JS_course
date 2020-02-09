@@ -1,22 +1,11 @@
-function Circle(radius) {
-  this.radius = radius;
+let person = { name: "stephan" };
 
-  let defaultLocation = { x: 0, y: 0 };
+Object.defineProperty(person, "name", {
+  writable: false,
+  enumerable: false, // the property will not show up in Objects.keys(person)
+  configurable: false // not deletable anymore
+});
 
-  this.draw = function() {
-    console.log("draw a circle");
-  };
+delete person.name;
 
-  Object.defineProperty(this, "defaultLocation", {
-    get: function() {
-      return defaultLocation;
-    },
-    set: function(value) {
-      if (!value.x || !value.y) throw new Error("Invalid location.");
-
-      defaultLocation = value;
-    }
-  });
-}
-
-const circle = new Circle(10);
+console.log(person);
