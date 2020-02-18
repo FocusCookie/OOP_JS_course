@@ -1,9 +1,19 @@
+function Shape() {}
+
+Shape.prototype.duplicate = function() {
+  console.log("duplicate");
+};
+
 function Circle(radius) {
   this.radius = radius;
 }
 
-Circle.prototype.toString = function() {
-  console.log("draw a circle with radius " + this.radius);
+Circle.prototype = Object.create(Shape.prototype);
+Circle.prototype.constructor = Circle;
+
+Circle.prototype.draw = function() {
+  console.log("Circle with Radius " + this.radius);
 };
 
-const c1 = new Circle(1);
+const s = new Shape();
+const c = new Circle(1);
