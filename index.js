@@ -1,3 +1,8 @@
+function extend(Child, Parent) {
+  Child.prototype = Object.create(Parent.prototype);
+  Child.prototype.constructor = Child;
+}
+
 function Shape(color) {
   this.color = color;
 }
@@ -13,8 +18,13 @@ function Circle(radius, color) {
   this.radius = radius;
 }
 
-Circle.prototype = Object.create(Shape.prototype);
-Circle.prototype.constructor = Circle;
+extend(Circle, Shape);
+
+function Square(size) {
+  this.size = size;
+}
+
+extend(Square, Shape);
 
 Circle.prototype.draw = function() {
   console.log("Circle with Radius " + this.radius);
