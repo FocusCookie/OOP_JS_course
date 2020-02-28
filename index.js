@@ -1,34 +1,32 @@
-function extend(Child, Parent) {
-  Child.prototype = Object.create(Parent.prototype);
-  Child.prototype.constructor = Child;
+function mixin(target, ...sources) {
+  Object.assign(target, ...sources);
 }
 
-function Shape(color) {
-  this.color = color;
-}
-
-Shape.prototype.duplicate = function() {
-  console.log("duplicate");
+const canEat = {
+  eat: function() {
+    this.hunger--;
+    console.log("eating");
+  }
+};
+const canWalk = {
+  walk: function() {
+    console.log("walking");
+  }
+};
+const canSwim = {
+  swim: function() {
+    console.log("swimming");
+  }
 };
 
-function Circle(radius, color) {
-  // use the super constructor to use the color prop frpm the shape on the circle
-  Shape.call(this, color);
+function Person() {}
+mixin(Person.prototype, canEat, canWalk, canSwim);
 
-  this.radius = radius;
-}
+const person = new Person();
+console.log(person);
 
-extend(Circle, Shape);
+function Fish() {}
+mixin(Fish.prototype, canEat, canSwim);
 
-function Square(size) {
-  this.size = size;
-}
-
-extend(Square, Shape);
-
-Circle.prototype.draw = function() {
-  console.log("Circle with Radius " + this.radius);
-};
-
-const s = new Shape();
-const c = new Circle(1, "greenish");
+const goldfish = new Fish();
+console.log(goldfish);
